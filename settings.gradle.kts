@@ -1,0 +1,1 @@
+rootProject.name = "alglang_mvp"
