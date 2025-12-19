@@ -39,6 +39,7 @@ public class AtomicType implements Typable {
             case CHAR -> '\u0000';
             case STRING -> "";
             case BOOLEAN -> false;
+            case VOID -> null;
         };
     }
 }
