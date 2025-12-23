@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Main {
+    private static boolean __had_error__ = false;
+
     public static void main(String[] args) {
        if (args.length > 1) {
            System.err.println("Synthax: alglang <scrip.al>");
@@ -22,5 +24,56 @@ public class Main {
            // run the program
            System.out.println("cool");
        }
+    }
+
+
+    /**
+     * This is the general function to report errors to the users.
+     *
+     * @param line    the line where the error occurred
+     * @param message the message that we will report to the users to inform them that an error
+     *                occurred
+     *
+     */
+    private static void report(int line, String message) {
+        report(line, null, message);
+    }
+
+    /**
+     * This is the generale function to report errors to the users.
+     *
+     * @param line the line where the error occurred
+     * @param where where the error was found in the source code
+     * @param message the message that we will report to the users to inform them that an error
+     *                occurred
+     * */
+    private static void report(int line, String where, String message)
+    {
+        System.err.format("[ligne %d ] Erreur : %s :  %s\n", line, where, message);
+        Main.__had_error__ = true;
+    }
+
+    /**
+     * This function report errors the users without telling them where on what the error was
+     * found.
+     *
+     * @param line the line where the error occurred
+     * @param message the message to display to the users
+     * */
+    public static void error(int line, String message)
+    {
+        Main.report(line, "", message);
+    }
+
+    public static void error(Token token, String message)
+    {
+        if (token.__token_type__() == TokenType.EOF)
+        {
+            report(token.__token_line__(), " à la fin", message);
+        }
+        else
+        {
+            report(token.__token_line__(), " à '" + token.__token_lexeme__() + "'", message);
+        }
     }
 }
