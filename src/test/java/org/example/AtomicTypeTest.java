@@ -16,7 +16,7 @@ class AtomicTypeTest {
 
         assertTrue(_integer_type_.__equal__(_integer_type_2_));
 
-        AtomicValue<Boolean> _zero_value_boolean_ = new AtomicValue<Boolean>(true, AtomicTypes.BOOLEAN);
+        AtomicValue<Boolean> _zero_value_boolean_ = new AtomicValue<>(true, AtomicTypes.BOOLEAN);
         AtomicType _boolean_type_ = new AtomicType("booléen", _zero_value_boolean_);
 
         assertFalse(_integer_type_.__equal__(_boolean_type_));
