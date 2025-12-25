@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScannerTest {
@@ -97,5 +99,44 @@ class ScannerTest {
         assertEquals(TokenType.EOF, __tokens__.get(16).__token_type__(), "Sixteenth token should be EOF.");
         assertEquals("nil", __tokens__.get(16).__token_lexeme__(), "Sixteenth token lexeme should be 'nil'");
 
+    }
+
+    // function to test string tokens.
+    @Test
+    void testStringTokens() {
+        var __source_code__ = "\"Bonjour à tous!\"";
+        var __scanner__ = new Scanner(__source_code__);
+        List<Token> __tokens__ = __scanner__.scanTokens();
+
+        assertEquals(2, __tokens__.size(), "Should contain only 2 tokens.");
+        assertEquals(TokenType.STRING, __tokens__.getFirst().__token_type__());
+        assertEquals("\"Bonjour à tous!\"", __tokens__.getFirst().__token_lexeme__());
+    }
+
+    // function to test a numbered tokens.
+    @Test
+    void testNumberTokens() {
+        var __source_code__ = "12.3\n 47";
+        Scanner __scanner__ = new Scanner(__source_code__);
+        List<Token> __tokens__ = __scanner__.scanTokens();
+
+        assertEquals(3, __tokens__.size(), "Should be equals to 2.");
+        assertEquals(TokenType.NUMBER, __tokens__.getFirst().__token_type__());
+        assertEquals(new AtomicValue<Double>(12.3, AtomicTypes.DOUBLE), __tokens__.getFirst().__token_literal__());
+
+        assertEquals(TokenType.NUMBER, __tokens__.get(1).__token_type__());
+        assertEquals(new AtomicValue<Integer>(47, AtomicTypes.INTEGER), __tokens__.get(1).__token_literal__());
+    }
+
+    @Test
+    void testIdentifierTokens() {
+        var __source_code__ = "Bonjour\"Bonjour\"";
+        Scanner __scanner__ = new Scanner(__source_code__);
+        List<Token> __tokens__ = __scanner__.scanTokens();
+
+        assertEquals(3, __tokens__.size(), "Should contains just 3 tokens");
+
+        assertEquals(TokenType.IDENTIFIER, __tokens__.get(1).__token_type__());
+        assertEquals(TokenType.STRING, __tokens__.get(0).__token_type__());
     }
 }

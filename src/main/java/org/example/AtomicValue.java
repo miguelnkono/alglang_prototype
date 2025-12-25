@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Objects;
+
 public class AtomicValue<T> implements Valuable {
     // which represent the exact underlining value.
     private final T __value__;
@@ -36,5 +38,17 @@ public class AtomicValue<T> implements Valuable {
     @Override
     public String toString() {
         return String.format("%s", this.__value__);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        AtomicValue<?> that = (AtomicValue<?>) o;
+        return Objects.equals(__value__, that.__value__) && __atomic_type__ == that.__atomic_type__;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(__atomic_type__);
     }
 }
