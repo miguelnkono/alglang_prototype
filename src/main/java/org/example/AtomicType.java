@@ -42,4 +42,9 @@ public class AtomicType implements Typable {
             case VOID -> null;
         };
     }
+
+    @Override
+    public String toString() {
+        return this.__name_type__;
+    }
 }

@@ -81,4 +81,7 @@ public abstract class ExprFinal
 	public void setType(Typable __type__) { this.__type__ = __type__; }
 
 	public abstract <R> R accept(Visitor<R> visitor);
+
+	@Override
+	public String toString() { return __type__.toString(); }
 }

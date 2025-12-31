@@ -7,23 +7,23 @@ public class Main {
     private static boolean __had_error__ = false;
 
     public static void main(String[] args) {
-       if (args.length > 1) {
-           System.err.println("Synthax: alglang <scrip.al>");
-           System.exit(0);
-       }
-       if (args.length == 1) {
-           if (!args[0].endsWith(".al")) {
-               System.err.println("Wrong script file!");
-               System.exit(64);
-           }
-           if (!Files.exists(Path.of(args[0]))) {
-               System.err.printf("File [%s] does not exist!\n", args[0]);
-               System.exit(64);
-           }
+        if (args.length > 1) {
+            System.err.println("Synthax: alglang <scrip.al>");
+            System.exit(0);
+        }
+        if (args.length == 1) {
+            if (!args[0].endsWith(".al")) {
+                System.err.println("Wrong script file!");
+                System.exit(64);
+            }
+            if (!Files.exists(Path.of(args[0]))) {
+                System.err.printf("File [%s] does not exist!\n", args[0]);
+                System.exit(64);
+            }
 
-           // run the program
-           System.out.println("cool");
-       }
+            // run the program
+            System.out.println("cool");
+        }
     }
 
 
@@ -42,13 +42,13 @@ public class Main {
     /**
      * This is the generale function to report errors to the users.
      *
-     * @param line the line where the error occurred
-     * @param where where the error was found in the source code
+     * @param line    the line where the error occurred
+     * @param where   where the error was found in the source code
      * @param message the message that we will report to the users to inform them that an error
      *                occurred
-     * */
-    private static void report(int line, String where, String message)
-    {
+     *
+     */
+    private static void report(int line, String where, String message) {
         System.err.format("[ligne %d ] Erreur : %s :  %s\n", line, where, message);
         Main.__had_error__ = true;
     }
@@ -57,22 +57,18 @@ public class Main {
      * This function report errors the users without telling them where on what the error was
      * found.
      *
-     * @param line the line where the error occurred
+     * @param line    the line where the error occurred
      * @param message the message to display to the users
-     * */
-    public static void error(int line, String message)
-    {
+     *
+     */
+    public static void error(int line, String message) {
         Main.report(line, "", message);
     }
 
-    public static void error(Token token, String message)
-    {
-        if (token.__token_type__() == TokenType.EOF)
-        {
+    public static void error(Token token, String message) {
+        if (token.__token_type__() == TokenType.EOF) {
             report(token.__token_line__(), " à la fin", message);
-        }
-        else
-        {
+        } else {
             report(token.__token_line__(), " à '" + token.__token_lexeme__() + "'", message);
         }
     }
