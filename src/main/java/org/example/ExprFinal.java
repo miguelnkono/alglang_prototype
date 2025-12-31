@@ -3,10 +3,10 @@ package org.example;
 public abstract class ExprFinal
 {
 	public interface Visitor<R> {
-		 R visitBinaryExprFinal (Binary exprfinal);
-		 R visitGroupingExprFinal (Grouping exprfinal);
-		 R visitUnaryExprFinal (Unary exprfinal);
-		 R visitLiteralExprFinal (Literal exprfinal);
+		 R visitBinaryExprFinal (Binary __exprfinal__);
+		 R visitGroupingExprFinal (Grouping __exprfinal__);
+		 R visitUnaryExprFinal (Unary __exprfinal__);
+		 R visitLiteralExprFinal (Literal __exprfinal__);
 	}
 
     public static class Binary extends ExprFinal 

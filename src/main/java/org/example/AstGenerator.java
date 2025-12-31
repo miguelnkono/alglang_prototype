@@ -102,7 +102,7 @@ public class AstGenerator
         for (String type : types)
         {
             String visitorMethodName = type.split(":")[0].trim();
-            writer.printf("\t\t R visit%s%s (%s %s);\n", visitorMethodName, name,
+            writer.printf("\t\t R visit%s%s (%s __%s__);\n", visitorMethodName, name,
                     visitorMethodName, name.toLowerCase());
         }
 
