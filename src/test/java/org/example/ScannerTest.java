@@ -136,7 +136,7 @@ class ScannerTest {
 
         assertEquals(3, __tokens__.size(), "Should contains just 3 tokens");
 
-        assertEquals(TokenType.IDENTIFIER, __tokens__.get(1).__token_type__());
-        assertEquals(TokenType.STRING, __tokens__.get(0).__token_type__());
+        assertEquals(TokenType.IDENTIFIER, __tokens__.get(0).__token_type__());
+        assertEquals(TokenType.STRING, __tokens__.get(1).__token_type__());
     }
 }

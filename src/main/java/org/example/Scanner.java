@@ -2,15 +2,41 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import static org.example.TokenType.*;
 
 public class Scanner {
     private final String __source_code__;
-    private List<Token> __tokens__;
+    private final List<Token> __tokens__;
     private int __current_position__ = 0;
     private int __start_position__ = 0;
     private int __line_number__ = 1;
+
+   private static final Map<String, TokenType> __keywords__;
+
+   static {
+       __keywords__ = new HashMap<>();
+       __keywords__.put("algorithme", ALGORITHM);
+       __keywords__.put("variables", VAR);
+       __keywords__.put("debut", BEGIN);
+       __keywords__.put("fin", END);
+       __keywords__.put("si", IF);
+       __keywords__.put("sinon", ELSE);
+       __keywords__.put("faux", FALSE);
+       __keywords__.put("vrai", TRUE);
+       __keywords__.put("fonction", FUN);
+       __keywords__.put("methode", METHOD);
+       __keywords__.put("structure", STRUCTURE);
+       __keywords__.put("retourner", RETURN);
+       __keywords__.put("tantque", WHILE);
+       __keywords__.put("pour", FOR);
+       __keywords__.put("repeter", REPEAT);
+       __keywords__.put("jusqua", UNTIL);
+       __keywords__.put("ecrire", WRITE);
+       __keywords__.put("lire", READ);
+   }
 
     public Scanner(String __source_code__) {
         this.__source_code__ = __source_code__;
@@ -173,7 +199,11 @@ public class Scanner {
                         __advance_character__();
                     }
 
-                    // todo: continue later.
+                    String __text__ = __source_code__.substring(__start_position__, __current_position__);
+                    TokenType __type__ = IDENTIFIER;;
+                    if (__keywords__.containsKey(__text__)) __type__ = __keywords__.get(__text__);
+
+                    addToken(__type__);
                 } else {
                     System.out.println(__current_char__);
                     Main.error(__line_number__, "Charactère non prise en compte");
