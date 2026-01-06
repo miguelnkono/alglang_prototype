@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Main {
-    private static boolean __had_error__ = false;
+    private static boolean had_error = false;
 
     public static void main(String[] args) {
         if (args.length > 1) {
@@ -50,7 +50,7 @@ public class Main {
      */
     private static void report(int line, String where, String message) {
         System.err.format("[ligne %d ] Erreur : %s :  %s\n", line, where, message);
-        Main.__had_error__ = true;
+        Main.had_error = true;
     }
 
     /**
@@ -66,10 +66,10 @@ public class Main {
     }
 
     public static void error(Token token, String message) {
-        if (token.__token_type__() == TokenType.EOF) {
-            report(token.__token_line__(), " à la fin", message);
+        if (token.token_type() == TokenType.EOF) {
+            report(token.token_line(), " à la fin", message);
         } else {
-            report(token.__token_line__(), " à '" + token.__token_lexeme__() + "'", message);
+            report(token.token_line(), " à '" + token.token_lexeme() + "'", message);
         }
     }
 }

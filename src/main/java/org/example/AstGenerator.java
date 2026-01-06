@@ -33,11 +33,11 @@ public class AstGenerator
                 "Unary : Token __operator__, Expr __right__",
                 "Literal : Valuable __value__"
         ), true);
-//        defineAst(__output_directory__, "Stmt", Arrays.asList(
-//                "Expression: Expr expression",
+        defineAst(__output_directory__, "Stmt", Arrays.asList(
+                "Expression: Expr __expression__"
 //                "Print: Expr expression",
 //                "Var:   Token name, Expr initializer"
-//        ), false);
+        ), false);
     }
 
     /**
