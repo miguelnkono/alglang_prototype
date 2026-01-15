@@ -22,10 +22,11 @@ public class Main {
             }
 
             // run the program
-            System.out.println("cool");
+            run(args[0]);
         }
     }
 
+    private static void run(String program) {}
 
     /**
      * This is the general function to report errors to the users.
